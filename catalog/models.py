@@ -9,3 +9,10 @@ class Plant(models.Model):
     image = models.ImageField(upload_to='catalog', verbose_name='Изображение товара')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время добавления товара')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время обновления товара')
+
+    class Meta:
+        verbose_name = 'Растение'
+        verbose_name_plural = 'Растения'
+
+    def __str__(self):
+        return self.name
