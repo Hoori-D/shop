@@ -2,4 +2,15 @@
 
 {% block title %}{{ title }}{% endblock %}
 
-{% block content %}{{ content }}{% endblock %}
+{% block content %}
+    {% for plant in plants %}
+    <div class="card" style="width: 18rem;">
+      <img src="{{ plant.image.url }}" class="card-img-top" alt="plant_img">
+      <div class="card-body">
+        <h5 class="card-title">{{ plant.name }}</h5>
+        <p class="card-text">{{ plant.description }}</p>
+        <a href="#" class="btn btn-primary">Купить</a>
+      </div>
+    </div>
+    {% endfor %}
+{% endblock %}

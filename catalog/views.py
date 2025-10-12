@@ -1,11 +1,12 @@
 from django.shortcuts import render
 
-# Create your views here.
+from catalog.models import Plant
 
 
 def index(request):
+    plants = Plant.objects.all()
     context = {
         'title': 'Каталог',
-        'content': 'Товары',
+        'plants': plants,
     }
     return render(request, 'catalog/index.html', context=context)
