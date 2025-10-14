@@ -3,14 +3,35 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    {% for plant in plants %}
-    <div class="card" style="width: 18rem;">
-      <img src="{{ plant.image.url }}" class="card-img-top" alt="plant_img">
-      <div class="card-body">
-        <h5 class="card-title">{{ plant.name }}</h5>
-        <p class="card-text">{{ plant.description }}</p>
-        <a href="#" class="btn btn-primary">Купить</a>
-      </div>
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <p class="fs-2">Категории</p>
+            {% for category in categories %}
+            <div class="row">
+                <div class="col">
+                    <p class="fs-6">{{ category.name }}</p>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+
+        <div class="col-10">
+            {% for plant in plants %}
+            <div class="card" style="width: 18rem;">
+              <img src="{{ plant.image.url }}" class="card-img-top" alt="plant_img">
+              <div class="card-body">
+                <h5 class="card-title">{{ plant.name }}</h5>
+                <p class="card-text">{{ plant.description }}</p>
+                <a href="#" class="btn btn-primary">Купить</a>
+              </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-    {% endfor %}
+
+</div>
+
 {% endblock %}
