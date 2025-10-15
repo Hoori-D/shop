@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from slugify import slugify
 
@@ -48,4 +49,7 @@ class Category(models.Model):
             self.slug = slugify(str(self.name))
 
         super().save(*args, **kwargs)
+
+    def get_absolut_url(self):
+        return reverse('catalog:category_by_slug', kwargs={'category_slug': self.slug})
 
