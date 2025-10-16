@@ -25,7 +25,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{ plant.name }}</h5>
                 <p class="card-text">{{ plant.description }}</p>
-                <a href="#" class="btn btn-primary">Купить</a>
+                <a href="{{ plant.get_absolut_url }}" class="btn btn-primary">Купить</a>
               </div>
             </div>
             {% endfor %}

@@ -19,16 +19,14 @@
         </div>
 
         <div class="col-10">
-            {% for plant in plants %}
             <div class="card" style="width: 18rem;">
-              <img src="{{ plant.image.url }}" class="card-img-top" alt="plant_img">
+              <img src="{{ plant_by_slug.image.url }}" class="card-img-top" alt="plant_img">
               <div class="card-body">
-                <h5 class="card-title">{{ plant.name }}</h5>
-                <p class="card-text">{{ plant.description }}</p>
-                <a href="{{ plant.get_absolut_url }}" class="btn btn-primary">Купить</a>
+                <h5 class="card-title">{{ plant_by_slug.name }}</h5>
+                <p class="card-text">{{ plant_by_slug.description }}</p>
+                <a href="{{ plant_by_slug.get_absolut_url }}" class="btn btn-primary">Купить</a>
               </div>
             </div>
-            {% endfor %}
         </div>
     </div>
 

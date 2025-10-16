@@ -28,6 +28,10 @@ class Plant(models.Model):
 
         super().save(*args, **kwargs)
 
+    def get_absolut_url(self):
+        return reverse('catalog:plant_by_slug', kwargs={'plant_slug': self.slug})
+
+
 
 
 class Category(models.Model):
