@@ -44,7 +44,7 @@
                 <a href="{% url 'main:about' %}" class="nav-link">О нас</a>
               </li>
             </ul>
-
+            {% if request.user.is_authenticated == True %}
             <div class="navbar-nav dropdown ms-auto">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="{% static 'images/login-box.jpg' %}" alt="login" class="login-img rounded-circle">
@@ -60,6 +60,12 @@
                     </li>
                 </ul>
             </div>
+            {% else %}
+            <div class="navbar-nav ms-auto">
+                <a href="{% url 'admin:index' %}" class="dropdown-item">Войти</a>
+                <a href="{% url 'admin:index' %}" class="dropdown-item ms-4">Регистрация</a>
+            </div>
+            {% endif %}
 
           </div>
         </div>
