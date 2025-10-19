@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'django_extensions',
 
     'main',
-    'catalog'
+    'catalog',
+    'user',
 
 
 ]
