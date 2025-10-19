@@ -8,3 +8,9 @@ def login(request):
         'title': 'Вход'
     }
     return render(request, 'user/login.html', context)
+
+def registration(request):
+    context = {
+        'title': 'Регистрация'
+    }
+    return render(request, 'user/registration.html', context)
