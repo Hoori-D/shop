@@ -1,17 +1,24 @@
+{% load static %}
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Вход</title>
+    <title>{{ title }}</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}'">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="{% static 'user/css/login.css' %}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   </head>
@@ -24,12 +31,12 @@
 <!--                  logo-->
                   <a href="#"
                      class="mb-2 position-absolute top-0 start-0 m-0 link-underline link-underline-opacity-0 logo-link d-flex">
-                      <img src="img/logo.jpg" class="logo rounded-circle" alt="login-image">
+                      <img src="{% static 'user/images/logo.jpg' %}" class="logo rounded-circle" alt="login-image">
                       <div class="ms-2 mt-2">Алоказица</div>
                   </a>
 
                   <p class="fs-1">Вход</p>
-                  <img src="img/login-box.jpg" class="login-image mb-2 rounded-circle" alt="login-image">
+                  <img src="{% static 'user/images/login-box.jpg' %}" class="login-image mb-2 rounded-circle" alt="login-image">
                   <form action="">
                       <label for="email" class="form-label">Почта</label>
                       <div class="input-group mb-3">
@@ -60,9 +67,9 @@
                   <p class="mt-4">─── Или войдите с помощью ───</p>
                   <div class="row mb-3">
                       <div class="col">
-                          <a href="#" class="mx-1"><img src="img/google-login.png" alt="google-login"
+                          <a href="#" class="mx-1"><img src="{% static 'user/images/google-login.png' %}" alt="google-login"
                                                         class="img-fluid google-login border rounded"></a>
-                          <a href="#" class="mx-1"><img src="img/vk-login.png" alt="vk-login"
+                          <a href="#" class="mx-1"><img src="{% static 'user/images/vk-login.png' %}" alt="vk-login"
                                                         class="img-fluid vk-login border rounded"></a>
                       </div>
                   </div>
@@ -71,7 +78,7 @@
                   </p>
               </div>
               <div class="col-6 p-0">
-                  <img src="img/login.jpg" class="img-fluid h-100" alt="login">
+                  <img src="{% static 'user/images/login.jpg' %}" class="img-fluid h-100" alt="login">
               </div>
           </div>
       </div>
