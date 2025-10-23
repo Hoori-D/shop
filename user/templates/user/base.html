@@ -25,7 +25,35 @@
   <body>
   <header></header>
   <section>
-    {% block content %}{% endblock %}
+    <div class="container-fluid vh-100 p-0">
+
+          <div class="row h-100 m-0">
+              <div class="col-6 p-0 d-flex flex-column justify-content-center align-items-center text-center">
+<!--                  logo-->
+                  <a href="{% url 'main:index' %}"
+                     class="mb-2 position-absolute top-0 start-0 m-0 link-underline link-underline-opacity-0 logo-link d-flex">
+                      <img src="{% static 'user/images/logo.jpg' %}" class="logo rounded-circle" alt="login-image">
+                      <div class="ms-2 mt-2">Алоказица</div>
+                  </a>
+                  {% block content %}{% endblock %}
+                  <p class="mt-4">─── Или войдите с помощью ───</p>
+                  <div class="row mb-3">
+                      <div class="col">
+                          <a href="#" class="mx-1"><img src="{% static 'user/images/google-login.png' %}" alt="google-login"
+                                                        class="img-fluid google-login border rounded"></a>
+                          <a href="#" class="mx-1"><img src="{% static 'user/images/vk-login.png' %}" alt="vk-login"
+                                                        class="img-fluid vk-login border rounded"></a>
+                      </div>
+                  </div>
+                  <p class="position-absolute bottom-0 start-0 ms-4 mb-4">Еще нет аккаунта?
+                      <a href="#" class="link-underline link-underline-opacity-75">Зарегистрироваться</a>
+                  </p>
+              </div>
+              <div class="col-6 p-0">
+                  <img src="{% static 'user/images/login.jpg' %}" class="img-fluid h-100" alt="login">
+              </div>
+          </div>
+    </div>
   </section>
   <footer></footer>
 
