@@ -55,5 +55,5 @@ class Category(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolut_url(self):
-        return reverse('catalog:category_by_slug', kwargs={'category_slug': self.slug})
+        return reverse('catalog:category_by_slug', kwargs={'category_slug': self.slug,  'page_number': 1})
 
