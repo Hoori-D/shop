@@ -1,10 +1,14 @@
 from django.shortcuts import render
 
+from catalog.models import Category
+
 
 def index(request):
+    categories = Category.objects.all()
+
     context = {
         'title': 'Главная страница',
-        'content': 'Главная',
+        'categories': categories,
     }
 
     return render(request, 'main/index.html', context)
