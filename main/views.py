@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from django.views.generic.base import TemplateView
+
 from catalog.models import Category
 
 
@@ -13,10 +15,11 @@ def index(request):
 
     return render(request, 'main/index.html', context)
 
-def about(request):
-    context = {
-        'title': 'О нас',
-        'content': 'О нас',
-    }
+class AboutView(TemplateView):
+    template_name = 'main/about.html'
 
-    return render(request, 'main/about.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'О нас'
+        context["content"] = 'О нас'
+        return context
