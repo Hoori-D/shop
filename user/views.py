@@ -1,16 +1,20 @@
 from django.shortcuts import render
+from django.views.generic.base import TemplateView
 
-# Create your views here.
+
+class LoginView(TemplateView):
+    template_name = 'user/login.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Вход'
+        return context
 
 
-def login(request):
-    context = {
-        'title': 'Вход'
-    }
-    return render(request, 'user/login.html', context)
+class RegistrationView(TemplateView):
+    template_name = 'user/registration.html'
 
-def registration(request):
-    context = {
-        'title': 'Регистрация'
-    }
-    return render(request, 'user/registration.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Регистрация'
+        return context
