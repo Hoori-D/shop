@@ -1,5 +1,3 @@
-from django.contrib.auth.forms import AuthenticationForm
-from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.contrib.auth.views import LoginView
 
@@ -7,7 +5,7 @@ from user.forms import LoginForm
 
 
 class LoginUserView(LoginView):
-    form_class = AuthenticationForm
+    form_class = LoginForm
     template_name = 'user/login.html'
 
 
