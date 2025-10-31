@@ -54,7 +54,8 @@
                     <li><a href="#" class="dropdown-item">Профиль</a></li>
                     <li><a href="#" class="dropdown-item">Корзина</a></li>
                     <li>
-                        <form action="" method="post">
+                        <form action="{% url 'user:logout' %}" method="post">
+                            {% csrf_token %}
                             <button type="submit" class="dropdown-item">Выйти</button>
                         </form>
                     </li>
