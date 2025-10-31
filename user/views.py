@@ -1,8 +1,13 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
+from django.contrib.auth.views import LoginView
+
+from user.forms import LoginForm
 
 
-class LoginView(TemplateView):
+class LoginUserView(LoginView):
+    form_class = AuthenticationForm
     template_name = 'user/login.html'
 
     def get_context_data(self, **kwargs):

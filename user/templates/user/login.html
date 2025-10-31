@@ -5,7 +5,9 @@
 {% block content %}
 <p class="fs-1">Вход</p>
 <img src="{% static 'user/images/login-box.jpg' %}" class="login-image mb-2 rounded-circle" alt="login-image">
-<form action="">
+<form method="post" action="">
+  {% csrf_token %}
+  {{ form.as_p }}
   <label for="email" class="form-label">Почта</label>
   <div class="input-group mb-3">
       <input type="email" class="form-control" id="email"
