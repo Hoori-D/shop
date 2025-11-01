@@ -11,25 +11,8 @@
   <label for="{{ f.id_for_label }}" class="form-label">{{ f.label }}</label>
   {{ f }}
   {% endfor %}
-  <label for="email" class="form-label">Почта</label>
-  <div class="input-group mb-3">
-      <input type="email" class="form-control" id="email"
-             placeholder="example@example.com" aria-describedby="email-addon">
-      <div class="input-group-append">
-        <span class="input-group-text" id="email-addon"><i class="bi bi-envelope"></i></span>
-      </div>
-  </div>
 
-  <label for="password" class="form-label">Пароль</label>
-  <div class="input-group mb-3">
-      <input type="password" class="form-control" id="password"
-             placeholder="********" aria-describedby="password-addon">
-      <div class="input-group-append">
-        <span class="input-group-text" id="password-addon"><i class="bi bi-eye-fill"></i></span>
-      </div>
-  </div>
-
-  <div class="form-check mb-2 d-flex justify-content-center">
+  <div class="form-check mt-2 mb-2 d-flex justify-content-center">
       <input type="checkbox" class="form-check-input me-2" id="remember" checked>
       <label for="remember" class="form-label">Запомнить меня</label>
   </div>

@@ -8,6 +8,8 @@ class LoginForm(AuthenticationForm):
         attrs={
             'class': 'form-control',
             'placeholder': 'example@example.com',
+            'id': 'email',
+            'aria-describedby': 'email-addon',
         }))
     password = forms.CharField(label='Пароль', max_length=50, widget=forms.PasswordInput(
         attrs={
