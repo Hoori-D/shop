@@ -32,7 +32,13 @@ class RegistrationForm(forms.Form):
             'placeholder': 'User',
         }))
 
-    password = forms.CharField(label='Пароль', max_length=50, widget=forms.PasswordInput(
+    password1 = forms.CharField(label='Пароль', max_length=50, widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': '********',
+        }))
+
+    password2 = forms.CharField(label='Повтор пароля', max_length=50, widget=forms.PasswordInput(
         attrs={
             'class': 'form-control',
             'placeholder': '********',
