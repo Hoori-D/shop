@@ -1,7 +1,7 @@
-from django.views.generic.base import TemplateView
+from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView
 
-from user.forms import LoginForm
+from user.forms import LoginForm, RegistrationForm
 
 
 class LoginUserView(LoginView):
@@ -15,7 +15,8 @@ class LoginUserView(LoginView):
         return context
 
 
-class RegistrationView(TemplateView):
+class RegistrationUserView(CreateView):
+    form_class = RegistrationForm
     template_name = 'user/registration.html'
 
     def get_context_data(self, **kwargs):

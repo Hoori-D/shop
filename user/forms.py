@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.forms import TextInput
 
 
@@ -19,7 +19,7 @@ class LoginForm(AuthenticationForm):
         }))
 
 
-class RegistrationForm(forms.Form):
+class RegistrationForm(UserCreationForm):
     email = forms.EmailField(label='Почта', max_length=100, widget=TextInput(
         attrs={
             'class': 'form-control',
