@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView
 
@@ -18,7 +19,7 @@ class LoginUserView(LoginView):
 class RegistrationUserView(CreateView):
     form_class = RegistrationForm
     template_name = 'user/registration.html'
-    success_url = 'user:login'
+    success_url = reverse_lazy('user:login')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
