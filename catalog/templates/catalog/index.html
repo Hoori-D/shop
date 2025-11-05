@@ -8,17 +8,7 @@
 <div class="container-lg text-center">
     <div class="row">
         <div class="col-2">
-            <p class="fs-2">Категории</p>
-            {% tag_categories as categories %}
-            {% for category in categories %}
-            <div class="row">
-                <div class="col">
-                    <a href="{{ category.get_absolut_url }}" class="fs-6">{{ category.name }}</a>
-                </div>
-            </div>
-            {% endfor %}
-
-
+            {% tag_categories %}
         </div>
 
         <div class="col-10">

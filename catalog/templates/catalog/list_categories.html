@@ -1,0 +1,10 @@
+<div class="dropdown">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Категории
+  </button>
+  <ul class="dropdown-menu">
+    {% for category in categories %}
+    <li><a class="dropdown-item" href="{{category.get_absolut_url}}">{{category.name}}</a></li>
+    {% endfor %}
+  </ul>
+</div>

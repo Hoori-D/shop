@@ -6,6 +6,7 @@ from catalog.models import Category
 register = template.Library()
 
 
-@register.simple_tag()
+@register.inclusion_tag('catalog/list_categories.html')
 def tag_categories():
-    return Category.objects.all()
+    categories = Category.objects.all()
+    return {'categories': categories}
