@@ -10,7 +10,7 @@
         <div class="col-2">
             {% tag_categories %}
         </div>
-
+        {% block goods %}
         <div class="col-10">
             <div class="row align-items-end">
                 {% for plant in plants %}
@@ -51,6 +51,7 @@
             </div>
 
         </div>
+        {% endblock %}
     </div>
 
 </div>
