@@ -44,6 +44,12 @@
                 <a href="{% url 'main:about' %}" class="nav-link">О нас</a>
               </li>
             </ul>
+            <div class="navbar-nav ms-auto me-auto">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
             {% if request.user.is_authenticated == True %}
             <div class="navbar-nav dropdown ms-auto">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
