@@ -3,8 +3,25 @@ from django.shortcuts import render
 from django.http import Http404
 
 from django.core.paginator import Paginator
+from django.views.generic import ListView
 
 from catalog.models import Plant, Category
+
+
+class IndexView(ListView):
+    model = Plant
+    template_name = 'catalog/index.html'
+    context_object_name = 'plants'
+    paginate_by = 3
+    ordering = ['name']
+
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Каталог'
+        context['active_page'] = self.kwargs.get('page_number')
+        return context
 
 
 def index(request, page_number=1):
