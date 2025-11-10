@@ -15,8 +15,6 @@ class IndexView(ListView):
     paginate_by = 3
     ordering = ['name']
 
-
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = 'Каталог'
@@ -24,37 +22,23 @@ class IndexView(ListView):
         return context
 
 
-def index(request, page_number=1):
-    plants = Plant.objects.all()
-    pages = Paginator(plants, 3)
+class CategoryView(ListView):
+    model = Plant
+    template_name = 'catalog/category.html'
+    context_object_name = 'plants'
+    paginate_by = 3
+    ordering = ['name']
 
-    if page_number in pages.page_range:
-        cur_page_plants = pages.page(page_number).object_list
-        has_next_page = pages.page(page_number).has_next()
-        if has_next_page:
-            next_page_number = pages.page(page_number).next_page_number()
-        else:
-            next_page_number = None
-        has_prev_page = pages.page(page_number).has_previous()
-        if has_prev_page:
-            prev_page_number = pages.page(page_number).previous_page_number()
-        else:
-            prev_page_number = None
-    else:
-        raise Http404('Out of range pages')
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        category_slug = self.kwargs.get('category_slug')
+        return queryset.filter(category__slug=category_slug)
 
-    context = {
-        'title': 'Каталог',
-        'plants': cur_page_plants,
-        'pages': pages,
-        'active_page': page_number,
-        'has_next_page': has_next_page,
-        'has_prev_page': has_prev_page,
-        'next_page_number': next_page_number,
-        'prev_page_number': prev_page_number,
-    }
-
-    return render(request, 'catalog/index.html', context=context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = 'Категории'
+        context['active_page'] = self.kwargs.get('page_number')
+        return context
 
 
 def category_view(request, category_slug, page_number=1):
