@@ -29,7 +29,7 @@ class Plant(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolut_url(self):
-        return reverse('catalog:plant_by_slug', kwargs={'plant_slug': self.slug})
+        return reverse('catalog:plant_by_slug', kwargs={'slug': self.slug})
 
 
 
@@ -55,5 +55,5 @@ class Category(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolut_url(self):
-        return reverse('catalog:category_by_slug', kwargs={'category_slug': self.slug})
+        return reverse('catalog:category_by_slug', kwargs={'slug': self.slug})
 

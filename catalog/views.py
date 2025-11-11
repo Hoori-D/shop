@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import Http404
 
 from django.core.paginator import Paginator
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from catalog.models import Plant, Category
 
@@ -31,22 +31,25 @@ class CategoryView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        category_slug = self.kwargs.get('category_slug')
+        category_slug = self.kwargs.get('slug')
         return queryset.filter(category__slug=category_slug)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = 'Категории'
+        if self.object_list:
+            context["title"] = self.object_list[0].category.name
+        else:
+            context["title"] = 'Товары не найдены'
         context['active_page'] = self.kwargs.get('page_number')
         return context
 
 
-def plant_view(request, plant_slug):
-    categories = Category.objects.all()
-    plant_by_slug = Plant.objects.get(slug=plant_slug)
-    context = {
-        'title': 'Каталог',
-        'categories': categories,
-        'plant_by_slug': plant_by_slug,
-    }
-    return render(request, 'catalog/plant.html', context=context)
+class PlantDetailView(DetailView):
+    model = Plant
+    template_name = 'catalog/plant.html'
+    context_object_name = 'plant_by_slug'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = self.object.name
+        return context
