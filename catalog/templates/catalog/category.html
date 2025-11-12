@@ -4,15 +4,17 @@
 
 {% block goods %}
 <div class="col-10">
-    <div class="row">
+    <div class="row align-items-end">
         {% for plant in plants %}
-        <div class="card" style="width: 18rem;">
-          <img src="{{ plant.image.url }}" class="card-img-top" alt="plant_img">
-          <div class="card-body">
-            <h5 class="card-title">{{ plant.name }}</h5>
-            <p class="card-text">{{ plant.description }}</p>
-            <a href="{{ plant.get_absolut_url }}" class="btn btn-primary">Купить</a>
-          </div>
+        <div class="col-4 mb-3">
+            <div class="card" style="width: 18rem;">
+              <img src="{{ plant.image.url }}" class="card-img-top" alt="plant_img">
+              <div class="card-body">
+                <h5 class="card-title">{{ plant.name }}</h5>
+                <p class="card-text">{{ plant.description }}</p>
+                <a href="{{ plant.get_absolut_url }}" class="btn btn-primary">Купить</a>
+              </div>
+            </div>
         </div>
         {% endfor %}
     </div>
