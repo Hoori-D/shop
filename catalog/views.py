@@ -15,6 +15,13 @@ class IndexView(ListView):
     paginate_by = 3
     ordering = ['name']
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        order = self.request.GET.get('order')
+        if not order or order == 'default' :
+            return qs
+        return qs.order_by(order)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = 'Каталог'

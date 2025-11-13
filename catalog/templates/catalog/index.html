@@ -12,6 +12,31 @@
         </div>
         {% block goods %}
         <div class="col-10">
+            <div class="row mb-2">
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                    Фильтры
+                  </button>
+                  <form action="{% url 'catalog:index' %}" method="get" class="dropdown-menu p-4">
+                    <div class="fs-5 mb-3">
+                        Сортировка:
+                    </div>
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" type="radio" name="order" id="radioDefault" value="default" checked>
+                      <label class="form-check-label" for="radioDefault">
+                        По умолчанию
+                      </label>
+                    </div>
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" type="radio" name="order" id="radioPrice" value="price">
+                      <label class="form-check-label" for="radioPrice">
+                        По возрастанию цены
+                      </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Применить</button>
+                  </form>
+                </div>
+            </div>
             <div class="row align-items-end">
                 {% for plant in plants %}
                 <div class="col-4 mb-3">
