@@ -12,12 +12,16 @@
         </div>
         {% block goods %}
         <div class="col-10">
+            {% block sort %}
             <div class="row mb-2">
                 <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                     Фильтры
                   </button>
-                  <form action="{% url 'catalog:index' %}" method="get" class="dropdown-menu p-4">
+                  <form
+                          action="{% if not request.resolver_match.kwargs %}{% url 'catalog:index' %}{% else %}{% url 'catalog:category_by_slug' request.resolver_match.kwargs.slug %}{% endif %}"
+                        method="get"
+                        class="dropdown-menu p-4">
                     <div class="fs-5 mb-3">
                         Сортировка:
                     </div>
@@ -37,6 +41,7 @@
                   </form>
                 </div>
             </div>
+            {% endblock sort %}
             <div class="row align-items-end">
                 {% for plant in plants %}
                 <div class="col-4 mb-3">

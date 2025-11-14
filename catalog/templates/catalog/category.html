@@ -4,6 +4,9 @@
 
 {% block goods %}
 <div class="col-10">
+    {% block sort %}
+    {{ block.super }}
+    {% endblock sort %}
     <div class="row align-items-end">
         {% for plant in plants %}
         <div class="col-4 mb-3">

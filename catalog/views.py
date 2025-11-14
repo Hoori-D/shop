@@ -37,9 +37,12 @@ class CategoryView(ListView):
     ordering = ['name']
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        qs = super().get_queryset()
         category_slug = self.kwargs.get('slug')
-        return queryset.filter(category__slug=category_slug)
+        order = self.request.GET.get('order')
+        if not order or order == 'default' :
+            return qs.filter(category__slug=category_slug)
+        return qs.filter(category__slug=category_slug).order_by(order)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
