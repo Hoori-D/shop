@@ -32,9 +32,15 @@
                       </label>
                     </div>
                     <div class="form-check mb-3">
-                      <input class="form-check-input" type="radio" name="order" id="radioPrice" value="price" {% if request.GET.order == 'price' %}checked{% endif %}>
-                      <label class="form-check-label" for="radioPrice">
-                        По возрастанию цены
+                      <input class="form-check-input" type="radio" name="order" id="radioHighPrice" value="price" {% if request.GET.order == 'price' %}checked{% endif %}>
+                      <label class="form-check-label" for="radioHighPrice">
+                        От дешевого
+                      </label>
+                    </div>
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" type="radio" name="order" id="radioLowPrice" value="-price" {% if request.GET.order == '-price' %}checked{% endif %}>
+                      <label class="form-check-label" for="radioLowPrice">
+                        От дорогого
                       </label>
                     </div>
                     <button type="submit" class="btn btn-primary">Применить</button>
@@ -48,7 +54,7 @@
                     <div class="card" style="width: 18rem;">
                       <img src="{{ plant.image.url }}" class="card-img-top" alt="plant_img">
                       <div class="card-body text-center">
-                        <h5 class="card-title">{{ plant.name }}</h5>
+                        <h5 class="card-title">{{ plant.name|capfirst }}</h5>
                         <p class="card-text">{{ plant.description }}</p>
                         <p class="card-text text-end">{{ plant.price }} руб.</p>
                         <a href="{{ plant.get_absolut_url }}" class="btn btn-primary mb-3">К товару</a>
