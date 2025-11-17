@@ -19,7 +19,7 @@
                     Фильтры
                   </button>
                   <form
-                          action="{% if not request.resolver_match.kwargs %}{% url 'catalog:index' %}{% else %}{% url 'catalog:category_by_slug' request.resolver_match.kwargs.slug %}{% endif %}"
+                        action="{% url 'catalog:category_by_slug' slug %}"
                         method="get"
                         class="dropdown-menu p-4">
                     <div class="fs-5 mb-3">

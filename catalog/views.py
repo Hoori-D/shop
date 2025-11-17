@@ -18,39 +18,24 @@ class IndexView(ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         order = self.request.GET.get('order')
+        category_slug = self.kwargs.get('slug', 'all')
+        if self.kwargs.get('slug') != 'all':
+            qs =  qs.filter(category__slug=category_slug)
         if not order or order == 'default' :
             return qs
         return qs.order_by(order)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = 'Каталог'
+        context['slug'] = self.kwargs.get('slug', 'all')
         context['active_page'] = self.kwargs.get('page_number')
-        return context
-
-
-class CategoryView(ListView):
-    model = Plant
-    template_name = 'catalog/category.html'
-    context_object_name = 'plants'
-    paginate_by = 3
-    ordering = ['name']
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        category_slug = self.kwargs.get('slug')
-        order = self.request.GET.get('order')
-        if not order or order == 'default' :
-            return qs.filter(category__slug=category_slug)
-        return qs.filter(category__slug=category_slug).order_by(order)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.object_list:
-            context["title"] = self.object_list[0].category.name
+        if self.kwargs.get('slug') != 'all':
+            if self.object_list:
+                context["title"] = f'Каталог:{self.object_list[0].category.name}'
+            else:
+                context["title"] = 'Товары не найдены'
         else:
-            context["title"] = 'Товары не найдены'
-        context['active_page'] = self.kwargs.get('page_number')
+            context["title"] = 'Каталог'
         return context
 
 
