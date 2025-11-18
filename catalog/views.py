@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
 
 from catalog.models import Plant, Category
+from catalog.utils import q_search
 
 
 class IndexView(ListView):
@@ -19,10 +20,18 @@ class IndexView(ListView):
         qs = super().get_queryset()
         order = self.request.GET.get('order')
         category_slug = self.kwargs.get('slug', 'all')
-        if self.kwargs.get('slug') != 'all':
+        query = self.request.GET.get('q')
+
+        if query:
+            category_slug = None
+            qs = q_search(query)
+
+        if self.kwargs.get('slug') != 'all' and not self.kwargs.get('slug') is None:
             qs =  qs.filter(category__slug=category_slug)
+
         if not order or order == 'default' :
             return qs
+
         return qs.order_by(order)
 
     def get_context_data(self, **kwargs):
