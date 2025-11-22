@@ -18,11 +18,25 @@
   {% csrf_token %}
   <div class="mb-3">
     <label for="id_username" class="form-label">Логин</label>
-    <input type="text" class="form-control" size="40" name="username" id="id_username" placeholder="User" value="{% if form.username.value %}{{ form.username.value }}{% endif %}" autofocus required>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" size="30" name="username" id="id_username" placeholder="User"
+             value="{% if form.username.value %}{{ form.username.value }}{% endif %}" aria-describedby="user-addon"
+             autofocus required>
+      <div class="input-group-append">
+        <span class="input-group-text" id="user-addon"><i class="bi bi-person-circle"></i></span>
+      </div>
+    </div>
   </div>
   <div class="mb-3">
     <label for="id_password" class="form-label">Пароль</label>
-    <input type="password" class="form-control" size="40" name="password" id="id_password" placeholder="********" required>
+    <div class="input-group mb-3">
+      <input type="password" class="form-control" size="30" name="password" id="id_password" placeholder="********"
+             aria-describedby="password-addon"
+             required>
+      <div class="input-group-append">
+        <span class="input-group-text" id="password-addon"><i class="bi bi-eye-slash-fill"></i></span>
+      </div>
+    </div>
   </div>
 
 
