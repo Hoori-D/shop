@@ -7,45 +7,47 @@
 <img src="{% static 'user/images/login-box.jpg' %}" class="login-image mb-2 rounded-circle" alt="login-image">
 {% if form.non_field_errors %}
 <div class="row justify-content-center">
-  <div class="col-6">
-    <div class="alert alert-warning" role="alert">
-      {{ form.non_field_errors }}
+    <div class="col-6">
+        <div class="alert alert-warning" role="alert">
+            {{ form.non_field_errors }}
+        </div>
     </div>
-  </div>
 </div>
 {% endif %}
 <form method="post" action="{% url 'user:login' %}">
-  {% csrf_token %}
-  <div class="mb-3">
-    <label for="id_username" class="form-label">Логин</label>
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" size="30" name="username" id="id_username" placeholder="User"
-             value="{% if form.username.value %}{{ form.username.value }}{% endif %}" aria-describedby="user-addon"
-             autofocus required>
-      <div class="input-group-append">
-        <span class="input-group-text" id="user-addon"><i class="bi bi-person-circle"></i></span>
-      </div>
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_username" class="form-label">Логин</label>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" size="30" name="username" id="id_username" placeholder="User"
+                   value="{% if form.username.value %}{{ form.username.value }}{% endif %}"
+                   aria-describedby="user-addon"
+                   autofocus required>
+            <div class="input-group-append">
+                <span class="input-group-text" id="user-addon"><i class="bi bi-person-circle"></i></span>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="mb-3">
-    <label for="id_password" class="form-label">Пароль</label>
-    <div class="input-group mb-3">
-      <input type="password" class="form-control" size="30" name="password" id="id_password" placeholder="********"
-             aria-describedby="password-addon"
-             required>
-      <div class="input-group-append">
-        <span class="input-group-text" id="password-addon"><i class="bi bi-eye-slash-fill"></i></span>
-      </div>
+    <div class="mb-3">
+        <label for="id_password" class="form-label">Пароль</label>
+        <div class="input-group mb-3">
+            <input type="password" class="form-control" size="30" name="password" id="id_password"
+                   placeholder="********"
+                   aria-describedby="password-addon"
+                   required>
+            <div class="input-group-append">
+                <span class="input-group-text" id="password-addon"><i class="bi bi-eye-slash-fill"></i></span>
+            </div>
+        </div>
     </div>
-  </div>
 
 
-  <div class="form-check mt-2 mb-2 d-flex justify-content-center">
-      <input type="checkbox" class="form-check-input me-2" id="remember" checked>
-      <label for="remember" class="form-label">Запомнить меня</label>
-  </div>
+    <div class="form-check mt-2 mb-2 d-flex justify-content-center">
+        <input type="checkbox" class="form-check-input me-2" id="remember" checked>
+        <label for="remember" class="form-label">Запомнить меня</label>
+    </div>
 
-  <button type="submit" class="btn btn-primary">Войти</button>
+    <button type="submit" class="btn btn-primary">Войти</button>
 
 </form>
 {% endblock %}
