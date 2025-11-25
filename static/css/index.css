@@ -3,12 +3,13 @@ body{
   font-weight: 400;
   font-style: normal;
   background-color: #F1F8E9;
+  color:#1B5E20;
 }
 .logo-img{
     width:60px;
     height:60px;
 }
-.login-img{
+.user-icon{
     width:50px;
     height:50px;
 }
@@ -17,9 +18,20 @@ body{
     font-weight: 400;
     font-size: 40px;
     font-style: normal;
+    color:white;
 }
 .navbar{
     background-color: #1B5E20;
-    color: #FFFFFF;
 }
+.btn-outline-success{
+    --bs-btn-color:white;
+    --bs-btn-border-color:white;
+}
+.nav-link{
+    color:white;
+}
+.vr{
+    background-color:white;
+}
+
 
