@@ -55,7 +55,9 @@
 
                 {% if request.GET.q %}
                 <h4 class="mt-4">Результаты поиска по запросу: {{ request.GET.q }}</h4>
-                {% else %}
+                {% endif %}
+
+                {% if not plants %}
                 <h4 class="mt-4">Ничего не найдено</h4>
                 {% endif %}
 
