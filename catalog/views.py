@@ -16,6 +16,11 @@ class IndexView(ListView):
     paginate_by = 3
     ordering = ['name']
 
+    def get_template_names(self):
+        if self.request.headers.get('HX-Request'):
+            return ['catalog/partials/plants_list.html']
+        return [self.template_name]
+
     def get_queryset(self):
         qs = super().get_queryset()
         order = self.request.GET.get('order')
