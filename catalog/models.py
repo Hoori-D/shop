@@ -12,7 +12,7 @@ class Plant(models.Model):
     image = models.ImageField(upload_to='catalog/plants', verbose_name='Изображение товара')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время добавления товара')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время обновления товара')
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, default=3, related_name='categories')
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, related_name='categories')
 
     class Meta:
         verbose_name = 'Растение'
