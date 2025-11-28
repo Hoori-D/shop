@@ -15,12 +15,15 @@
             {% block sort %}
             <div class="row mb-2">
                 <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                          data-bs-auto-close="outside" aria-expanded="false">
                     Фильтры
                   </button>
                   <form
-                        action="{% if request.GET.q %}{% url 'catalog:search' %}{% else %}{% url 'catalog:category_by_slug' slug %}{% endif %}"
-                        method="get"
+                        hx-get="{% if request.GET.q %}{% url 'catalog:search' %}{% else %}{% url 'catalog:category_by_slug' slug %}{% endif %}"
+                        hx-target="#plants-list"
+                        hx-trigger="submit"
+                        hx-on::after-request="document.body.click()"
                         class="dropdown-menu p-4">
                     <div class="fs-5 mb-3">
                         Сортировка:
