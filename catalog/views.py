@@ -42,7 +42,7 @@ class IndexView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['slug'] = self.kwargs.get('slug', 'all')
-        context['active_page'] = self.kwargs.get('page_number')
+        context['active_page'] = self.request.GET.get('page')
         if self.kwargs.get('slug') != 'all':
             if self.object_list:
                 context["title"] = f'Каталог:{self.object_list[0].category.name}'

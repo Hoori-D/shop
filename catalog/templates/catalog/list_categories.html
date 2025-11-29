@@ -4,7 +4,10 @@
   </button>
   <ul class="dropdown-menu">
     {% for category in categories %}
-    <li><div hx-get="{% url 'catalog:category_by_slug' category.slug %}" hx-target="#plants-list" class="dropdown-item">{{category.name}}</div></li>
+    <li><div hx-get="{% url 'catalog:category_by_slug' category.slug %}"
+             hx-target="#plants-list"
+             hx-push-url="true"
+             class="dropdown-item">{{category.name}}</div></li>
     {% endfor %}
   </ul>
 </div>
