@@ -81,6 +81,7 @@
                 </ul>
 
                 <!--            search -->
+                {% block search %}
                 <div class="navbar-nav ms-auto me-auto">
                     <form class="d-flex" role="search" method="get" action="{% url 'catalog:search' %}">
                         <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search"
@@ -88,6 +89,7 @@
                         <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
                     </form>
                 </div>
+                {% endblock %}
 
                 <!--            account-->
                 {% if request.user.is_authenticated == True %}
