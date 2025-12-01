@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include('main.urls', namespace='main')),
     path('catalog/', include('catalog.urls', namespace='catalog')),
     path('user/', include('user.urls', namespace='user')),
+    path('cart/', include('carts.urls', namespace='carts')),
 ] + debug_toolbar_urls()
 
 if settings.DEBUG:
