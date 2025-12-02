@@ -8,35 +8,19 @@
         <div class="col-6">
             <div class="fs-5">Корзина</div>
             <ul class="list-group list-group-horizontal">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
+              <li class="list-group-item">Название</li>
+              <li class="list-group-item">Количество</li>
+              <li class="list-group-item">цена за шт.</li>
+              <li class="list-group-item">всего</li>
             </ul>
+            {% for cart_item in cart_items %}
             <ul class="list-group list-group-horizontal">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
+              <li class="list-group-item">{{ cart_item.plant.name }}</li>
+              <li class="list-group-item">{{ cart_item.quantity }}</li>
+              <li class="list-group-item">{{ cart_item.plant.price }}</li>
+              <li class="list-group-item">{{ cart_item.total_price }}</li>
             </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-            </ul>
+            {% endfor %}
         </div>
     </div>
 </div>
