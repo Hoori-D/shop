@@ -1,6 +1,9 @@
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
-from carts.models import CartItem
+from carts.models import CartItem, Cart
+from catalog.models import Plant
 
 
 class IndexView(ListView):
@@ -13,3 +16,19 @@ class IndexView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = f'Корзина {self.object_list[0].cart.user.username}'
         return context
+
+
+@login_required
+def add_item(request, slug):
+    item = Plant.objects.get(slug=slug)
+    user = request.user
+    cart, created = Cart.objects.get_or_create(user=request.user)
+    cart_items = cart.orders.all()
+    is_in_cart = cart_items.filter(plant=item).exists()
+    if is_in_cart:
+        cart_item = CartItem.objects.get(plant=item)
+        cart_item.quantity += 1
+        cart_item.save()
+    else:
+        CartItem.objects.create(cart=cart ,plant=item)
+    return redirect(request.META['HTTP_REFERER'])

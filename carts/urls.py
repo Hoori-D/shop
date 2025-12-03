@@ -4,4 +4,5 @@ from . import views
 app_name='carts'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
+    path('add_item/<slug:slug>', views.add_item, name='add_item'),
 ]

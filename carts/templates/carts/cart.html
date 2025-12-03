@@ -20,6 +20,7 @@
               <li class="list-group-item">{{ cart_item.plant.price }}</li>
               <li class="list-group-item">{{ cart_item.total_price }}</li>
             </ul>
+            <a href="{% url 'carts:add_item'  cart_item.plant.slug  %}">Добавить</a>
             {% endfor %}
         </div>
     </div>

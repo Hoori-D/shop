@@ -22,7 +22,7 @@ class Cart(models.Model):
 class CartItem(models.Model):
     cart = models.ForeignKey(to=Cart, on_delete=models.CASCADE, related_name='orders', verbose_name='Корзина')
     plant = models.ForeignKey(to=Plant, on_delete=models.CASCADE, related_name='orders', verbose_name='Растение')
-    quantity = models.PositiveIntegerField(default=0)
+    quantity = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления в корзину')
 
 
