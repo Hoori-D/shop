@@ -21,6 +21,7 @@
               <li class="list-group-item">{{ cart_item.total_price }}</li>
             </ul>
             <a href="{% url 'carts:add_item'  cart_item.plant.slug  %}">Добавить</a>
+            <a href="{% url 'carts:remove_item'  cart_item.plant.slug  %}">Удалить</a>
             {% endfor %}
         </div>
     </div>

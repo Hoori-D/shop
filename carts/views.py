@@ -32,3 +32,18 @@ def add_item(request, slug):
     else:
         CartItem.objects.create(cart=cart ,plant=item)
     return redirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def remove_item(request, slug):
+    item = Plant.objects.get(slug=slug)
+    user = request.user
+    cart = Cart.objects.get(user=request.user)
+    cart_item = CartItem.objects.get(plant=item)
+    cart_quant = cart_item.quantity
+    if cart_quant > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+    return redirect(request.META['HTTP_REFERER'])
