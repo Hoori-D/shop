@@ -24,7 +24,7 @@
                    aria-describedby="user-addon"
                    autofocus required>
             <div class="input-group-append">
-                <span class="input-group-text" id="user-addon"><i class="bi bi-person-circle"></i></span>
+                <span class="input-group-text ms-1" id="user-addon"><i class="bi bi-person-circle"></i></span>
             </div>
         </div>
     </div>
@@ -36,7 +36,7 @@
                    aria-describedby="password-addon"
                    required>
             <div class="input-group-append">
-                <span class="input-group-text" id="password-addon"><i class="bi bi-eye-slash-fill"></i></span>
+                <button class="btn btn-light ms-1" id="password-addon" type="button" onclick="change_visibility()"><i class="bi bi-eye-slash-fill" id="password_icon"></i></button>
             </div>
         </div>
     </div>
@@ -50,4 +50,23 @@
     <button type="submit" class="btn btn-primary">Войти</button>
 
 </form>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function change_visibility() {
+      var pass_type = document.getElementById("id_password");
+      var pass_icon = document.getElementById("password_icon")
+      if (pass_type.type === "password") {
+        pass_type.type = "text";
+        pass_icon.classList = "bi bi-eye-fill"
+
+      } else {
+        pass_type.type = "password";
+        pass_icon.classList = "bi bi-eye-slash-fill"
+      }
+    }
+</script>
 {% endblock %}

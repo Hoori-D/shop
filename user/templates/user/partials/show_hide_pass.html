@@ -1,0 +1,17 @@
+<div class="mb-3" id="show_hide_password">
+        <label for="id_password" class="form-label">Пароль</label>
+        <div class="input-group mb-3">
+            <input type="{{ pass_type }}" class="form-control" size="30" name="password" id="id_password"
+                   placeholder="********"
+                   aria-describedby="password-addon"
+                   required value="{% if form.password.value %}{{ form.password.value }}{% endif %}">
+            <div class="input-group-append">
+                <button type="button" class="input-group-text" id="password-addon"
+                      hx-post="{% url 'user:swap_password_visibility' %}"
+                      hx-target="#show_hide_password"
+                      hx-vals="{ 'current_type': '{{ pass_type }}' }"
+                      hx-swap="outerHTML"
+                      hx-trigger="click"><i class="bi {{ icon_type }}"></i></button>
+            </div>
+        </div>
+</div>
