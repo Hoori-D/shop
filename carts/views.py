@@ -14,7 +14,7 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = f'Корзина {self.object_list[0].cart.user.username}'
+        context["title"] = f'Корзина {self.request.user}'
         return context
 
 
@@ -36,6 +36,15 @@ def add_item(request, slug):
 
 @login_required
 def remove_item(request, slug):
+    item = Plant.objects.get(slug=slug)
+    user = request.user
+    cart = Cart.objects.get(user=request.user)
+    CartItem.objects.get(plant=item).delete()
+    return redirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def change_item(request, slug):
     item = Plant.objects.get(slug=slug)
     user = request.user
     cart = Cart.objects.get(user=request.user)
