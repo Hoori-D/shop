@@ -21,9 +21,9 @@
                   <li class="list-group-item">{{ cart_item.plant.price }}</li>
                   <li class="list-group-item">{{ cart_item.total_price }}</li>
                 </ul>
-                <a href="{% url 'carts:add_item'  cart_item.plant.slug  %}">Добавить единицу товара.</a>
-                <a href="{% url 'carts:change_item'  cart_item.plant.slug  %}">Удалить единицу товара.</a>
-                <a href="{% url 'carts:remove_item'  cart_item.plant.slug  %}">Удалить весь товар.</a>
+                <a href="{% url 'carts:add_item'  cart_item.plant.slug  %}" class="btn btn-success"><i class="bi bi-plus-circle"></i></a>
+                <a href="{% url 'carts:change_item'  cart_item.plant.slug  %}" class="btn btn-success"><i class="bi bi-dash-circle"></i></a>
+                <a href="{% url 'carts:remove_item'  cart_item.plant.slug  %}" class="btn btn-success"><i class="bi bi-trash"></i>  </a>
                 {% endfor %}
             {% else %}
                 <span class="fs-5">Товары не найдены, перейти в</span>
