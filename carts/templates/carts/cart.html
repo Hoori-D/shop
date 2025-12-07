@@ -7,27 +7,31 @@
     <div class="row mt-4">
         <div class="col-6">
             <div class="fs-5">Корзина</div>
-            {% if  cart_items %}
-                <ul class="list-group list-group-horizontal">
-                  <li class="list-group-item">Название</li>
-                  <li class="list-group-item">Количество</li>
-                  <li class="list-group-item">цена за шт.</li>
-                  <li class="list-group-item">всего</li>
-                </ul>
+            {% if cart_items %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Количество</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Цена за шт.</th>
+                    <th scope="col">Итого</th>
+                </tr>
                 {% for cart_item in cart_items %}
-                <ul class="list-group list-group-horizontal">
-                  <li class="list-group-item">{{ cart_item.plant.name }}</li>
-                  <li class="list-group-item">{{ cart_item.quantity }}</li>
-                  <li class="list-group-item">{{ cart_item.plant.price }}</li>
-                  <li class="list-group-item">{{ cart_item.total_price }}</li>
-                </ul>
-                <a href="{% url 'carts:add_item'  cart_item.plant.slug  %}" class="btn btn-success"><i class="bi bi-plus-circle"></i></a>
-                <a href="{% url 'carts:change_item'  cart_item.plant.slug  %}" class="btn btn-success"><i class="bi bi-dash-circle"></i></a>
-                <a href="{% url 'carts:remove_item'  cart_item.plant.slug  %}" class="btn btn-success"><i class="bi bi-trash"></i>  </a>
+                <tr>
+                    <th scope="col"><a href="{% url 'carts:add_item'  cart_item.plant.slug  %}" class="btn btn-success"><i
+                            class="bi bi-plus-circle"></i></a> {{ cart_item.quantity }} <a
+                            href="{% url 'carts:change_item'  cart_item.plant.slug  %}" class="btn btn-success"><i
+                            class="bi bi-dash-circle"></i></a></th>
+                    <th scope="col">{{ cart_item.plant.name }}</th>
+                    <th scope="col">{{ cart_item.plant.price }}</th>
+                    <th scope="col">{{ cart_item.total_price }}</th>
+                </tr>
                 {% endfor %}
+                </thead>
+            </table>
             {% else %}
-                <span class="fs-5">Товары не найдены, перейти в</span>
-                <a href="{% url 'catalog:category_by_slug' 'all' %}" class="fs-5">каталог</a>
+            <span class="fs-5">Товары не найдены, перейти в</span>
+            <a href="{% url 'catalog:category_by_slug' 'all' %}" class="fs-5">каталог</a>
             {% endif %}
         </div>
     </div>
