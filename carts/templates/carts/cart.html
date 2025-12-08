@@ -25,6 +25,7 @@
                     <th scope="col">{{ cart_item.plant.name }}</th>
                     <th scope="col">{{ cart_item.plant.price }}</th>
                     <th scope="col">{{ cart_item.total_price }}</th>
+                    <th scope="col"><img src="{{ cart_item.plant.image.url }}" width="100" alt="item_img"></th>
                 </tr>
                 {% endfor %}
                 </thead>
