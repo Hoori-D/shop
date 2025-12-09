@@ -1,6 +1,9 @@
+{% load catalog_tags %}
+
 <div id="plants-list">
     <div class="row align-items-end">
         {% for plant in plants %}
+        {% tag_quantity plant as quant %}
         <div class="col-4 mb-3">
             <div class="card" style="width: 18rem;">
               <a href="{{ plant.get_absolut_url }}"><img src="{{ plant.image.url }}" class="card-img-top" alt="plant_img"></a>
@@ -24,6 +27,9 @@
                     {% endautoescape %}
                 </p>
                 <p class="card-text text-end">{{ plant.price }} руб.</p>
+                {% if request.user.is_authenticated == True %}
+                <p class="card-text text-end">{{ quant }} шт.</p>
+                {% endif %}
                 <a href="{% url 'carts:add_item' plant.slug %}" class="btn btn-primary mb-3">Добавить в корзину</a>
                 <p class="card-text "><small class="text-body-secondary">{{ plant.updated_at }}</small></p>
               </div>
