@@ -28,7 +28,10 @@
                 </p>
                 <p class="card-text text-end">{{ plant.price }} руб.</p>
                 {% if request.user.is_authenticated == True %}
-                <p class="card-text text-end">{{ quant }} шт.</p>
+                <span><a href="{% url 'carts:add_item'  plant.slug  %}" class="btn btn-success"><i
+                class="bi bi-plus-circle"></i></a> {{ quant }} <a
+                href="{% url 'carts:change_item'  plant.slug  %}" class="btn btn-success"><i
+                class="bi bi-dash-circle"></i></a></span>
                 {% endif %}
                 <a href="{% url 'carts:add_item' plant.slug %}" class="btn btn-primary mb-3">Добавить в корзину</a>
                 <p class="card-text "><small class="text-body-secondary">{{ plant.updated_at }}</small></p>

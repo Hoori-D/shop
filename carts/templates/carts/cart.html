@@ -10,22 +10,16 @@
             {% if cart_items %}
             <table class="table">
                 <thead>
-                <tr>
-                    <th scope="col">Количество</th>
-                    <th scope="col">Название</th>
-                    <th scope="col">Цена за шт.</th>
-                    <th scope="col">Итого</th>
-                </tr>
                 {% for cart_item in cart_items %}
                 <tr>
+                    <th scope="col"><img src="{{ cart_item.plant.image.url }}" width="100" alt="item_img"></th>
+                    <th scope="col">{{ cart_item.plant.name }}</th>
+                    <th scope="col">{{ cart_item.plant.price }}</th>
+                    <th scope="col">{{ cart_item.total_price }}</th>
                     <th scope="col"><a href="{% url 'carts:add_item'  cart_item.plant.slug  %}" class="btn btn-success"><i
                             class="bi bi-plus-circle"></i></a> {{ cart_item.quantity }} <a
                             href="{% url 'carts:change_item'  cart_item.plant.slug  %}" class="btn btn-success"><i
                             class="bi bi-dash-circle"></i></a></th>
-                    <th scope="col">{{ cart_item.plant.name }}</th>
-                    <th scope="col">{{ cart_item.plant.price }}</th>
-                    <th scope="col">{{ cart_item.total_price }}</th>
-                    <th scope="col"><img src="{{ cart_item.plant.image.url }}" width="100" alt="item_img"></th>
                 </tr>
                 {% endfor %}
                 </thead>
