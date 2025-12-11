@@ -22,7 +22,7 @@ def tag_quantity(context, plant):
     if item.exists():
         return item.first().quantity
     else:
-        return 'У вас нет данного товара, срочно приобрести!!!'
+        return None
 
 
 @register.simple_tag(takes_context=True)

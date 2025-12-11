@@ -6,38 +6,49 @@
         {% tag_quantity plant as quant %}
         <div class="col-4 mb-3">
             <div class="card" style="width: 18rem;">
-              <a href="{{ plant.get_absolut_url }}"><img src="{{ plant.image.url }}" class="card-img-top" alt="plant_img"></a>
-              <div class="card-body text-center">
-                <h5 class="card-title">
-                    {% autoescape off %}
+                <a href="{{ plant.get_absolut_url }}"><img src="{{ plant.image.url }}" class="card-img-top"
+                                                           alt="plant_img"></a>
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        {% autoescape off %}
                         {% if plant.headline %}
-                            {{ plant.headline }}
+                        {{ plant.headline }}
                         {% else %}
-                            {{ plant.name|capfirst }}
+                        {{ plant.name|capfirst }}
                         {% endif %}
-                    {% endautoescape %}
-                </h5>
-                <p class="card-text">
-                    {% autoescape off %}
+                        {% endautoescape %}
+                    </h5>
+                    <p class="card-text">
+                        {% autoescape off %}
                         {% if plant.bodyline %}
-                            {{ plant.bodyline }}
+                        {{ plant.bodyline }}
                         {% else %}
-                            {{ plant.description }}
+                        {{ plant.description }}
                         {% endif %}
-                    {% endautoescape %}
-                </p>
-                <p class="card-text text-end">{{ plant.price }} руб.</p>
-                {% if request.user.is_authenticated == True %}
-                <span><a href="{% url 'carts:add_item'  plant.slug  %}" class="btn btn-success"><i
-                class="bi bi-plus-circle"></i></a> {{ quant }} <a
-                href="{% url 'carts:change_item'  plant.slug  %}" class="btn btn-success"><i
-                class="bi bi-dash-circle"></i></a></span>
-                {% endif %}
-                <a href="{% url 'carts:add_item' plant.slug %}" class="btn btn-primary mb-3">Добавить в корзину</a>
-                <p class="card-text "><small class="text-body-secondary">{{ plant.updated_at }}</small></p>
-              </div>
+                        {% endautoescape %}
+                    </p>
+                    <p class="card-text text-end">{{ plant.price }} руб.</p>
+                    <div class="row align-items-center mb-3 justify-content-center">
+                        <div class="col-auto mb-2"><a href="{% url 'carts:add_item' plant.slug %}"
+                                              class="btn btn-success">Добавить вкорзину</a></div>
+                        <div class="col-auto">
+                                {% if request.user.is_authenticated == True and quant %}
+                                <a href="{% url 'carts:add_item'  plant.slug  %}" class="btn btn-success me-2"><i
+                                        class="bi bi-plus-circle"></i></a>
+                                {{ quant }}
+                                <a href="{% url 'carts:change_item'  plant.slug  %}" class="btn btn-success ms-2"><i
+                                        class="bi bi-dash-circle"></i></a>
+                                {% endif %}
+                        </div>
+                    </div>
+                    <span>
+
+
+                    </span>
+                    <p class="card-text "><small class="text-body-secondary">{{ plant.updated_at }}</small></p>
+                </div>
             </div>
-            </div>
+        </div>
         {% endfor %}
     </div>
     {% include 'catalog/partials/pagination.html' %}
