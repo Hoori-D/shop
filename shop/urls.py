@@ -30,6 +30,7 @@ urlpatterns = [
     path('catalog/', include('catalog.urls', namespace='catalog')),
     path('user/', include('user.urls', namespace='user')),
     path('cart/', include('carts.urls', namespace='carts')),
+    path('profile/', include('user_profile.urls', namespace='profile')),
 ] + debug_toolbar_urls()
 
 if settings.DEBUG:
