@@ -26,7 +26,7 @@ def add_item(request, slug):
     cart_items = cart.orders.all()
     is_in_cart = cart_items.filter(plant=item).exists()
     if is_in_cart:
-        cart_item = CartItem.objects.get(plant=item)
+        cart_item = CartItem.objects.filter(cart=cart, plant=item).first()
         cart_item.quantity += 1
         cart_item.save()
     else:
@@ -48,7 +48,7 @@ def change_item(request, slug):
     item = Plant.objects.get(slug=slug)
     user = request.user
     cart = Cart.objects.get(user=request.user)
-    cart_item = CartItem.objects.get(plant=item)
+    cart_item = CartItem.objects.filter(cart=cart, plant=item).first()
     cart_quant = cart_item.quantity
     if cart_quant > 1:
         cart_item.quantity -= 1
