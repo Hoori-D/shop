@@ -10,10 +10,19 @@
 {% else %}
 <img src="{% static 'images/login-box.jpg' %}" width="200" height="200" class="img-thumbnail " alt="profile-img">
 {% endif %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+<div class="row">
+    <div class="col-4">
+       <form method="post" action="{% url 'user_profile:index' request.user.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_image" class="form-label">Выберите изображение для аватара</label>
+                <input class="form-control" type="file" id="id_image" name="image">
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+
+</div>
+
 
 {% endblock %}

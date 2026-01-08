@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
@@ -17,16 +18,17 @@ class IndexView(DetailView):
         return context
 
 
+@login_required
 def change_profile(request, pk):
     try:
         profile = Profile.objects.get(user=request.user)
     except Profile.DoesNotExist:
         profile = Profile.objects.create(user=request.user)
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES, instance=profile)  # Pass request.FILES
-        if form.is_valid():
-            form.save()
-            return redirect(reverse_lazy('user_profile:index',kwargs={'pk': pk}))
+        image_file = request.FILES.get('image')
+        profile.image = image_file
+        profile.save()
+        return redirect(reverse_lazy('user_profile:index',kwargs={'pk': pk}))
     else:
         form = UserProfileForm(instance=profile)
 
