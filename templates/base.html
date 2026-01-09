@@ -99,7 +99,9 @@
                         <img src="{{ request.user.user_profile.image.url }}" alt="user icon" class="user-icon rounded-circle">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
+                        {% if request.user.is_superuser %}
                         <li><a href="{% url 'admin:index' %}" class="dropdown-item">Админка</a></li>
+                        {% endif %}
                         <li><a href="{% url 'user_profile:index' request.user.id %}" class="dropdown-item">Профиль</a></li>
                         <li><a href="{% url 'carts:index' %}" class="dropdown-item">Корзина</a></li>
                         <li>
