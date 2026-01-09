@@ -96,7 +96,7 @@
                 <div class="navbar-nav dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        <img src="{% static 'images/login-box.jpg' %}" alt="user icon" class="user-icon rounded-circle">
+                        <img src="{{ request.user.user_profile.image.url }}" alt="user icon" class="user-icon rounded-circle">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a href="{% url 'admin:index' %}" class="dropdown-item">Админка</a></li>
