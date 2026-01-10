@@ -31,16 +31,22 @@ def change_profile(request, pk):
         if request.FILES.get('image'):
             image_file = request.FILES.get('image')
             profile.image = image_file
-        if request.POST.get('username'):
+            messages.success(request,
+                             "Изображение обновлено")
+        if request.POST.get('username') and request.POST.get('username') != user.username:
             if request.POST.get('username') in all_users:
                 messages.warning(request,"Данное имя уже используется")
             else:
                 profile.user.username = request.POST.get('username')
                 messages.success(request,"Имя обновлено")
+        if request.POST.get('gender') and profile.gender != request.POST.get('gender'):
+            profile.gender = request.POST.get('gender')
+            messages.success(request,
+                             "Пол обновлен")
         profile.user.save()
         profile.save()
         return redirect(reverse_lazy('user_profile:index',kwargs={'pk': pk}))
     else:
         form = UserProfileForm(instance=profile)
 
-    return render(request,'user_profile/index.html',{'form': form, 'title': f'Профиль - {user.username}'})
+    return render(request,'user_profile/index.html',{'form': form, 'title': f'Профиль - {user.username}', 'profile': profile})

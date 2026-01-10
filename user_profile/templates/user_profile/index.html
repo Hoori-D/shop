@@ -18,6 +18,14 @@
                 <label for="id_image" class="form-label">Выберите изображение для аватара</label>
                 <input class="form-control" type="file" id="id_image" name="image">
             </div>
+           <div class="mb-3">
+                <label for="gender" class="form-label">Пол</label>
+               <select class="form-select" aria-label="select gender" id="gender" name="gender">
+                  <option value="" {% if not profile.gender %}selected{% endif %}>Не выбрано</option>
+                  <option value="M" {% if profile.gender == 'M' %}selected{% endif %}>Мужчина</option>
+                  <option value="F" {% if profile.gender == 'F' %}selected{% endif %}>Женщина</option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>
     </div>

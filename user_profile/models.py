@@ -5,8 +5,13 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
+    GENDERS = {
+        "M": "Мужчина",
+        "F": "Женщина",
+    }
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='user_profile')
     image = models.ImageField(upload_to='user_profile/profile_images/', verbose_name='Изображение профиля')
+    gender = models.CharField(blank=True, max_length=1, choices=GENDERS)
 
     def __str__(self):
         return f'Профиль пользователя {self.user.username}'
