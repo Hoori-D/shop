@@ -1,16 +1,25 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.forms import TextInput, ModelForm, EmailInput, Select, FileInput
 
 from user_profile.models import Profile
 
 
-class UserForm(forms.ModelForm):
+class UserForm(ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ['username']
+        fields = ['username', 'email']
+        widgets = {
+            'username':TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'username'}),
+            'email':EmailInput(attrs={'class': 'form-control mb-3', 'placeholder': 'name@example.com'})
+        }
 
 
-class ProfileForm(forms.ModelForm):
+class ProfileForm(ModelForm):
     class Meta:
         model = Profile
         fields = ['image', 'gender']
+        widgets = {
+            'image': FileInput(attrs={'class': 'form-control mb-3', }),
+            'gender':Select(attrs={'class': 'form-select mb-3',}),
+        }

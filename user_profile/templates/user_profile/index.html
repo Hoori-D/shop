@@ -4,46 +4,39 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div class="mb-3">{{ object.username }}</div>
-<img src="{{ request.user.user_profile.image.url }}" alt="User Avatar" width="200" height="200">
 <div class="row">
-    <div class="col-4">
-       <form method="post" action="{% url 'user_profile:index' request.user.id %}" enctype="multipart/form-data">
-            {% csrf_token %}
-<!--            <div class="mb-3">-->
-<!--              <label for="username" class="form-label">Имя пользователя</label>-->
-<!--              <input type="text" class="form-control" id="username" placeholder="username" name="username" value="{{ request.user.username }}">-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="id_image" class="form-label">Выберите изображение для аватара</label>-->
-<!--                <input class="form-control" type="file" id="id_image" name="image">-->
-<!--            </div>-->
-<!--           <div class="mb-3">-->
-<!--                <label for="gender" class="form-label">Пол</label>-->
-<!--               <select class="form-select" aria-label="select gender" id="gender" name="gender">-->
-<!--                  <option value="" {% if not profile.gender %}selected{% endif %}>Не выбрано</option>-->
-<!--                  <option value="M" {% if profile.gender == 'M' %}selected{% endif %}>Мужчина</option>-->
-<!--                  <option value="F" {% if profile.gender == 'F' %}selected{% endif %}>Женщина</option>-->
-<!--                </select>-->
-<!--            </div>-->
-           {{ user_form }}
-           {{ profile_form }}
-            <button type="submit" class="btn btn-primary">Сохранить</button>
-        </form>
-    </div>
-</div>
-{% if messages %}
-<div class="row fixed-bottom justify-content-center">
-    <div class="col-4 text-center">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+    <div class="col">
+        <div class="mb-3">{{ object.username }}</div>
+        <div class="row justify-content-center mb-3">
+            <div class="col-4">
+                <img src="{{ request.user.user_profile.image.url }}" alt="User Avatar" width="200" height="200">
             </div>
-        {% endfor %}
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4">
+               <form method="post" action="{% url 'user_profile:index' request.user.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                   {{ user_form }}
+                   {{ profile_form }}
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+        </div>
+        {% if messages %}
+        <div class="row fixed-bottom justify-content-center">
+            <div class="col-4 text-center">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
-{% endif %}
+
 
 
 {% endblock %}
