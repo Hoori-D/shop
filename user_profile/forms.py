@@ -8,10 +8,12 @@ from user_profile.models import Profile
 class UserForm(ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email']
+        fields = ['username', 'email','first_name', 'last_name']
         widgets = {
             'username':TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'username'}),
-            'email':EmailInput(attrs={'class': 'form-control mb-3', 'placeholder': 'name@example.com'})
+            'email':EmailInput(attrs={'class': 'form-control mb-3', 'placeholder': 'name@example.com'}),
+            'first_name':EmailInput(attrs={'class': 'form-control mb-3', 'placeholder': 'name'}),
+            'last_name':EmailInput(attrs={'class': 'form-control mb-3', 'placeholder': 'surname'})
         }
 
 
