@@ -64,11 +64,13 @@ def profile_update(request, pk):
         user_form = UserForm(request.POST, instance=user)
         if profile_form.is_valid():
             profile_form.save()
-            messages.success(request,
+            if profile_form.has_changed():
+                messages.success(request,
                              "Профиль обновлен")
         if user_form.is_valid():
             user_form.save()
-            messages.success(request,
+            if user_form.has_changed():
+                messages.success(request,
                              "Пользователь обновлен")
     else:
         profile_form = ProfileForm(instance=profile)
