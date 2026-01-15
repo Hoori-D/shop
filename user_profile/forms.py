@@ -21,6 +21,10 @@ class ProfileForm(ModelForm):
     class Meta:
         model = Profile
         fields = ['image', 'gender']
+        labels = {
+            'image': 'Вставьте сюда изображение',
+            'gender': 'Пол'
+        }
         widgets = {
             'image': FileInput(attrs={'class': 'form-control mb-3', }),
             'gender':Select(attrs={'class': 'form-select mb-3',}),

@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
@@ -63,15 +64,25 @@ def profile_update(request, pk):
         profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
         user_form = UserForm(request.POST, instance=user)
         if profile_form.is_valid():
-            profile_form.save()
             if profile_form.has_changed():
                 messages.success(request,
                              "Профиль обновлен")
+            profile_form.save()
         if user_form.is_valid():
-            user_form.save()
             if user_form.has_changed():
+                changed_fields = user_form.changed_data
+                if 'email' in changed_fields:
+                    send_mail("Subject here",
+                              "Here is the message.",
+                              "from@example.com",
+                              ["to@example.com"],
+                              fail_silently=False,
+                    )
+                    messages.success(request,
+                                     "Почта обновлена")
                 messages.success(request,
                              "Пользователь обновлен")
+            user_form.save()
     else:
         profile_form = ProfileForm(instance=profile)
         user_form = UserForm(instance=user)
