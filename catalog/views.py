@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.db.models import F
+from django.shortcuts import render, get_object_or_404
 
 from django.http import Http404
 
@@ -14,7 +15,7 @@ class IndexView(ListView):
     template_name = 'catalog/index.html'
     context_object_name = 'plants'
     paginate_by = 3
-    ordering = ['name']
+    ordering = ['-popularity']
 
     def get_template_names(self):
         if self.request.headers.get('HX-Request'):
@@ -57,6 +58,12 @@ class PlantDetailView(DetailView):
     model = Plant
     template_name = 'catalog/plant.html'
     context_object_name = 'plant_by_slug'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        self.model.objects.filter(pk=obj.pk).update(popularity=F('popularity') + 1)
+        obj.refresh_from_db()
+        return obj
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

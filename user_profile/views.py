@@ -56,6 +56,7 @@ class IndexView(DetailView):
 @login_required
 def profile_update(request, pk):
     user = request.user
+    mail = user.email
     try:
         profile = Profile.objects.get(user=request.user)
     except Profile.DoesNotExist:
@@ -75,7 +76,7 @@ def profile_update(request, pk):
                     send_mail("Subject here",
                               "Here is the message.",
                               "from@example.com",
-                              ["to@example.com"],
+                              [mail],
                               fail_silently=False,
                     )
                     messages.success(request,
