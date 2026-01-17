@@ -10,7 +10,7 @@ class Plant(models.Model):
     slug = models.SlugField(max_length=100, unique=True, verbose_name='URL-адрес')
     price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00, db_index=True ,verbose_name='Цена')
     image = models.ImageField(upload_to='catalog/plants', verbose_name='Изображение товара')
-    popularity = models.PositiveIntegerField(default=0, verbose_name='Популярность товара')
+    views_count = models.PositiveIntegerField(default=0, verbose_name='Популярность товара')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время добавления товара')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время обновления товара')
     category = models.ForeignKey('Category', on_delete=models.PROTECT, related_name='categories')

@@ -15,7 +15,7 @@ class IndexView(ListView):
     template_name = 'catalog/index.html'
     context_object_name = 'plants'
     paginate_by = 3
-    ordering = ['-popularity']
+    ordering = ['-views_count']
 
     def get_template_names(self):
         if self.request.headers.get('HX-Request'):
@@ -61,7 +61,7 @@ class PlantDetailView(DetailView):
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
-        self.model.objects.filter(pk=obj.pk).update(popularity=F('popularity') + 1)
+        self.model.objects.filter(pk=obj.pk).update(views_count=F('views_count') + 1)
         obj.refresh_from_db()
         return obj
 

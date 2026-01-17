@@ -5,11 +5,11 @@ from catalog.models import Plant, Category
 
 @admin.register(Plant)
 class PlantAdmin(admin.ModelAdmin):
-    list_display = ['name', 'price', 'created_at', 'updated_at', 'popularity']
+    list_display = ['name', 'price', 'created_at', 'updated_at', 'views_count']
     list_display_links = ['name']
     list_editable = ['price']
 
-    readonly_fields = ['slug', 'created_at', 'updated_at', 'popularity']
+    readonly_fields = ['slug', 'created_at', 'updated_at', 'views_count']
 
     search_fields = ['name']
 
