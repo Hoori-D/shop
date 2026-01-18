@@ -57,10 +57,7 @@ class IndexView(DetailView):
 def profile_update(request, pk):
     user = request.user
     mail = user.email
-    try:
-        profile = Profile.objects.get(user=request.user)
-    except Profile.DoesNotExist:
-        profile = Profile.objects.create(user=request.user)
+    profile = Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
         user_form = UserForm(request.POST, instance=user)
