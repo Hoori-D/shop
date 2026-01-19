@@ -9,7 +9,11 @@
         <div class="mb-3">{{ object.username }}</div>
         <div class="row justify-content-center mb-3">
             <div class="col-4">
+                {% if request.user.user_profile.image %}
                 <img src="{{ request.user.user_profile.image.url }}" alt="User Avatar" width="200" height="200">
+                {% else %}
+                <img src="{% static 'images/placeholder.jpg' %}" alt="User Avatar" width="200" height="200">
+                {% endif %}
             </div>
         </div>
         <div class="row justify-content-center">
