@@ -12,8 +12,8 @@ class UserForm(ModelForm):
         widgets = {
             'username':TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'username'}),
             'email':EmailInput(attrs={'class': 'form-control mb-3', 'placeholder': 'name@example.com'}),
-            'first_name':EmailInput(attrs={'class': 'form-control mb-3', 'placeholder': 'name'}),
-            'last_name':EmailInput(attrs={'class': 'form-control mb-3', 'placeholder': 'surname'})
+            'first_name':TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'name'}),
+            'last_name':TextInput(attrs={'class': 'form-control mb-3', 'placeholder': 'surname'})
         }
 
 
