@@ -25,28 +25,27 @@ class IndexView(DetailView):
 class ProfileChange(LoginRequiredMixin, View):
     template_name = 'user_profile/index.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        self.user_obj = request.user
-        self.mail = self.user_obj.email
-        self.profile, created = Profile.objects.get_or_create(user=self.user_obj)
-        return super().dispatch(request, *args, **kwargs)
-
     def get(self, request, *args, **kwargs):
-        profile_form = ProfileForm(instance=self.profile)
-        user_form = UserForm(instance=self.user_obj)
+        user_obj = request.user
+        mail = user_obj.email
+        profile, created = Profile.objects.get_or_create(user=user_obj)
+        profile_form = ProfileForm(instance=profile)
+        user_form = UserForm(instance=user_obj)
         return render(request,
                       'user_profile/index.html',
                       {
                           'profile_form': profile_form, 'user_form': user_form,
-                          'title': f'Профиль - {self.user_obj.username}'
+                          'title': f'Профиль - {user_obj.username}'
                       })
     def post(self, request, *args, **kwargs):
-        profile, created = Profile.objects.get_or_create(user=request.user)
+        user_obj = request.user
+        mail = user_obj.email
+        profile, created = Profile.objects.get_or_create(user=user_obj)
         profile_form = ProfileForm(request.POST,
                                    request.FILES,
                                    instance=profile)
         user_form = UserForm(request.POST,
-                             instance=self.user_obj)
+                             instance=user_obj)
         if profile_form.is_valid():
             if profile_form.has_changed():
                 messages.success(request,
@@ -59,7 +58,7 @@ class ProfileChange(LoginRequiredMixin, View):
                     send_mail("Subject here",
                               "Here is the message.",
                               "from@example.com",
-                              [self.mail],
+                              [mail],
                               fail_silently=False, )
                     messages.success(request,
                                      "Почта обновлена")
@@ -71,5 +70,5 @@ class ProfileChange(LoginRequiredMixin, View):
                       'user_profile/index.html',
                       {
                           'profile_form': profile_form, 'user_form': user_form,
-                          'title': f'Профиль - {self.user_obj.username}'
+                          'title': f'Профиль - {user_obj.username}'
                       })
