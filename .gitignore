@@ -12,4 +12,6 @@ wheels/
 .venv
 
 media/
+fixtures/
 /.env
+
