@@ -11,6 +11,10 @@ class IndexView(ListView):
     template_name = 'carts/cart.html'
     context_object_name = 'cart_items'
 
+    def get_queryset(self):
+        super().get_queryset()
+        cart = Cart.objects.get(user=self.request.user)
+        return CartItem.objects.filter(cart=cart)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
