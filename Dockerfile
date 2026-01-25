@@ -3,7 +3,7 @@ FROM python:3.11-slim-bookworm
 ENV PYTHONDONTWRITEBYTECODE=1 \
 PYTHONUNBUFFERED=1
 
-WORKDIR /APP
+WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
     curl \
