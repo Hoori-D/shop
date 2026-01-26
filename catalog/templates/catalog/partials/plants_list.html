@@ -3,7 +3,9 @@
 <div id="plants-list">
     <div class="row align-items-end">
         {% for plant in plants %}
+        {% if request.user.is_authenticated %}
         {% tag_quantity plant as quant %}
+        {% endif %}
         <div class="col-4 mb-3">
             <div class="card" style="width: 18rem;">
                 <a href="{{ plant.get_absolut_url }}"><img src="{{ plant.image.url }}" class="card-img-top"
