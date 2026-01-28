@@ -36,7 +36,9 @@ def add_item(request, slug):
     else:
         CartItem.objects.create(cart=cart ,plant=item)
     if request.session.get('next_page'):
-        return redirect(request.session.get('next_page'))
+        next_page = request.session.get('next_page')
+        del request.session['next_page']
+        return redirect(next_page)
     return redirect(request.META['HTTP_REFERER'])
 
 
