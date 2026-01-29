@@ -13,16 +13,16 @@ class LoginUserView(LoginView):
         plant_slug = self.request.GET.get('plant_slug')
         if plant_slug:
             request.session['adding_plant_slug'] = plant_slug
-            request.session['next_page'] = request.META['HTTP_REFERER']
+            request.session['prev_page'] = request.META['HTTP_REFERER']
         return super().get(request, *args, **kwargs)
 
     def get_success_url(self):
-        next_page = super().get_success_url()
-        plant_slug = self.request.session['adding_plant_slug']
+        prev_page = super().get_success_url()
+        plant_slug = self.request.session.get('adding_plant_slug')
         if plant_slug:
             del self.request.session['adding_plant_slug']
             return reverse('carts:add_item', kwargs={'slug': plant_slug})
-        return next_page
+        return prev_page
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
