@@ -47,6 +47,5 @@ jobs:
         DB_HOST: ${{ secrets.localhost }}
         DB_PORT: ${{ secrets.DB_PORT }}
       run:
-        sleep 5
         uv run manage.py test
 
