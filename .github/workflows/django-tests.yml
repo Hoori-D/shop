@@ -25,4 +25,7 @@ jobs:
       run: uv sync --locked --all-extras --dev
       
     - name: Run Tests
+      env:
+        DB_HOST: ${{ secrets.DB_HOST }}
+      
       run: uv run manage.py test
