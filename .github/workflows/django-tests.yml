@@ -10,10 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [3.7, 3.8, 3.9]
 
     steps:
     - uses: actions/checkout@v4
@@ -27,6 +23,6 @@ jobs:
 
     - name: Install the project
       run: uv sync --locked --all-extras --dev
+      
     - name: Run Tests
-      run: |
-        uv run manage.py test
+      run: uv run manage.py test
