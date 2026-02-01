@@ -26,6 +26,6 @@ jobs:
       
     - name: Run Tests
       env:
-        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_HOST: ${{ secrets.DB_PORT }}
       
       run: uv run manage.py test
