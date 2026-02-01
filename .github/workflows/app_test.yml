@@ -30,6 +30,6 @@ jobs:
         POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
         POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         DB_HOST: ${{ secrets.localhost }}
-        DB_PORT: ${{ secrets.5432 }}
+        DB_PORT: ${{ secrets.DB_PORT }}
       run: uv run manage.py test
 
