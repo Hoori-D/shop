@@ -11,6 +11,16 @@ jobs:
     name: python
     runs-on: ubuntu-latest
 
+    services:
+      db:
+        image: postgres:17
+        env:
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        ports:
+          - ${{ secrets.DB_PORT }}:5432
+
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
