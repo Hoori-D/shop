@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.urls import reverse
 
@@ -9,7 +10,8 @@ class Plant(models.Model):
     description = models.TextField(default='', verbose_name='Описание товара')
     slug = models.SlugField(max_length=100, unique=True, verbose_name='URL-адрес')
     price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00, db_index=True ,verbose_name='Цена')
-    image = models.ImageField(upload_to='catalog/plants', verbose_name='Изображение товара')
+    sale = models.DecimalField(max_digits=3, decimal_places=0, default=0,verbose_name='Скидка в процентах')
+    image = models.ImageField(upload_to='catalog/plants', verbose_name='Количество посещений')
     views_count = models.PositiveIntegerField(default=0, verbose_name='Популярность товара')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время добавления товара')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время обновления товара')
@@ -31,6 +33,10 @@ class Plant(models.Model):
 
     def get_absolut_url(self):
         return reverse('catalog:plant_by_slug', kwargs={'slug': self.slug})
+
+    def get_sale_price(self):
+        finale_price = self.price - (self.price * self.sale / 100)
+        return finale_price
 
 
 
