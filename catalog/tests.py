@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.db import IntegrityError
 from django.test import TestCase
 
 from .models import Plant, Category
@@ -43,3 +44,28 @@ class PlantTest(TestCase):
 
     def test_get_sale_price(self):
         self.assertEqual(self.plant.get_sale_price(), 100.00)
+
+    def test_negative_price_constraints(self):
+        self.plant.price = -100.00
+        with self.assertRaises(IntegrityError):
+            self.plant.save()
+
+    def test_zero_price_constraints(self):
+        self.plant.price = 0
+        with self.assertRaises(IntegrityError):
+            self.plant.save()
+
+    def test_negative_sale_constraints(self):
+        self.plant.sale = -20
+        with self.assertRaises(IntegrityError):
+            self.plant.save()
+
+    def test_gt100_sale_constraints(self):
+        self.plant.sale = 120
+        with self.assertRaises(IntegrityError):
+            self.plant.save()
+
+    def test_negative_stock_count_constraints(self):
+        self.plant.stock_count = -55
+        with self.assertRaises(IntegrityError):
+            self.plant.save()

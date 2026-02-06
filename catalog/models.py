@@ -22,6 +22,24 @@ class Plant(models.Model):
     class Meta:
         verbose_name = 'Растение'
         verbose_name_plural = 'Растения'
+        constraints = [
+            models.CheckConstraint(
+                condition=models.Q(price__gt=0),
+                name='price_gt_0',
+            ),
+            models.CheckConstraint(
+                condition=models.Q(sale__gte=0),
+                name='sale_gte_0'
+            ),
+            models.CheckConstraint(
+                condition=models.Q(sale__lte=100),
+                name='sale_lte_100'
+            ),
+            models.CheckConstraint(
+                condition=models.Q(stock_count__gte=0),
+                name='stock_count_gte_0'
+            )
+        ]
 
     def __str__(self):
         return self.name
