@@ -15,8 +15,11 @@ class CategoryTest(TestCase):
 
 
 class PlantTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.category = Category.objects.create(name='Test', slug='test')
+
     def setUp(self):
-        self.category = Category.objects.create(name='Test', slug='test')
         self.plant = Plant.objects.create(name='Test', description='Test description', stock_count=20, sale=20, slug='test', image='test.jpg', price=125, category=Category.objects.get(name='Test'))
 
     def test_negative_sale(self):
