@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.test import TestCase
 
-from .models import Plant, Category
+from catalog.models import Plant, Category
 
 
 class CategoryTest(TestCase):
