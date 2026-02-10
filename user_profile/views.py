@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -12,9 +12,12 @@ from user_profile.forms import ProfileForm, UserForm
 from user_profile.models import Profile
 
 
-class IndexView(DetailView):
+class IndexView(UserPassesTestMixin, LoginRequiredMixin, DetailView):
     model = get_user_model()
     template_name = 'user_profile/index.html'
+
+    def test_func(self):
+        return self.request.user.id == self.get_object().id
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -22,8 +25,12 @@ class IndexView(DetailView):
         return context
 
 
-class ProfileChange(LoginRequiredMixin, View):
+class ProfileChange(UserPassesTestMixin, LoginRequiredMixin, View):
     template_name = 'user_profile/index.html'
+
+    def test_func(self):
+        user_id = self.kwargs.get('pk')
+        return self.request.user.id == user_id
 
     def get(self, request, *args, **kwargs):
         user_obj = request.user
@@ -37,6 +44,7 @@ class ProfileChange(LoginRequiredMixin, View):
                           'profile_form': profile_form, 'user_form': user_form,
                           'title': f'Профиль - {user_obj.username}'
                       })
+
     def post(self, request, *args, **kwargs):
         user_obj = request.user
         mail = user_obj.email
