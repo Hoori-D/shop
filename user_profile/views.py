@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import DetailView
 from django.contrib.auth import get_user_model
@@ -74,9 +74,4 @@ class ProfileChange(UserPassesTestMixin, LoginRequiredMixin, View):
                                  "Пользователь обновлен")
             user_form.save()
 
-        return render(request,
-                      'user_profile/index.html',
-                      {
-                          'profile_form': profile_form, 'user_form': user_form,
-                          'title': f'Профиль - {user_obj.username}'
-                      })
+        return redirect(reverse('user_profile:index', kwargs={'pk': user_obj.id}))
