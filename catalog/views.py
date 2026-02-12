@@ -1,4 +1,5 @@
 from django.db.models import F
+from django.db.models import Sum
 from django.shortcuts import render, get_object_or_404
 
 from django.http import Http404
@@ -10,7 +11,7 @@ from catalog.models import Plant, Category
 from catalog.utils import q_search
 
 
-class IndexView(ListView):
+class PlantListView(ListView):
     model = Plant
     template_name = 'catalog/index.html'
     context_object_name = 'plants'
@@ -36,7 +37,7 @@ class IndexView(ListView):
             qs =  qs.filter(category__slug=category_slug)
 
         if not order or order == 'default' :
-            return qs
+            return qs.annotate(total_in_cart=Sum('orders__quantity'))
 
         return qs.order_by(order)
 

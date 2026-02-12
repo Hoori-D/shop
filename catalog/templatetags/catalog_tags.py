@@ -15,17 +15,6 @@ def tag_categories():
 
 
 @register.simple_tag(takes_context=True)
-def tag_quantity(context, plant):
-    user = context.get('request').user
-    cart, created = Cart.objects.get_or_create(user=user)
-    item = CartItem.objects.filter(plant=plant, cart=cart)
-    if item.exists():
-        return item.first().quantity
-    else:
-        return None
-
-
-@register.simple_tag(takes_context=True)
 def change_params(context, **kwargs):
     query = context['request'].GET.dict()
     query.update(kwargs)

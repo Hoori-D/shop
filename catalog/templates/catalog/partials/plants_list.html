@@ -3,9 +3,6 @@
 <div id="plants-list">
     <div class="row align-items-end">
         {% for plant in plants %}
-        {% if request.user.is_authenticated %}
-        {% tag_quantity plant as quant %}
-        {% endif %}
         <div class="col-4 mb-3">
             <div class="card" style="width: 18rem;">
                 <a href="{{ plant.get_absolut_url }}"><img src="{{ plant.image.url }}" class="card-img-top"
@@ -42,10 +39,10 @@
                             {% endif %}
                         </div>
                         <div class="col-auto">
-                                {% if request.user.is_authenticated == True and quant %}
+                                {% if request.user.is_authenticated == True and plant.total_in_cart %}
                                 <a href="{% url 'carts:add_item'  plant.slug  %}" class="btn btn-success me-2"><i
                                         class="bi bi-plus-circle"></i></a>
-                                {{ quant }}
+                                {{ plant.total_in_cart }}
                                 <a href="{% url 'carts:change_item'  plant.slug  %}" class="btn btn-success ms-2"><i
                                         class="bi bi-dash-circle"></i></a>
                                 {% endif %}
