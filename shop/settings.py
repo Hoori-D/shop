@@ -110,10 +110,11 @@ DATABASES = {
     }
 }
 
+
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-        "LOCATION": "127.0.0.1:11211",
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6380",
         "TIMEOUT": 300,
         "OPTIONS": {"MAX_ENTRIES": 300}
     }
