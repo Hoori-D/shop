@@ -113,8 +113,8 @@ DATABASES = {
 
 CACHES = {
     "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://cache:6379",
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "unique-snowflake",
         "TIMEOUT": 300,
         "OPTIONS": {"MAX_ENTRIES": 300}
     }

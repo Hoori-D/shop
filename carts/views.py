@@ -12,9 +12,9 @@ class IndexView(ListView):
     context_object_name = 'cart_items'
 
     def get_queryset(self):
-        super().get_queryset()
-        cart = Cart.objects.get(user=self.request.user)
-        return CartItem.objects.filter(cart=cart)
+        queryset = super().get_queryset()
+        filtered_queryset = queryset.filter(cart__user=self.request.user).select_related('plant')
+        return filtered_queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
