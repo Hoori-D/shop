@@ -57,6 +57,7 @@ class Plant(models.Model):
     def get_absolut_url(self):
         return reverse('catalog:plant_by_slug', kwargs={'slug': self.slug})
 
+    @property
     def get_sale_price(self):
         finale_price = self.price - (self.price * self.sale / 100)
         return finale_price

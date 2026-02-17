@@ -1,7 +1,7 @@
 {% load catalog_tags %}
 
 <div id="plants-list">
-    <div class="row align-items-end">
+    <div class="row align-items-start">
         {% for plant in plants %}
         <div class="col-4 mb-3">
             <div class="card" style="width: 18rem;">
@@ -26,7 +26,16 @@
                         {% endif %}
                         {% endautoescape %}
                     </p>
-                    <p class="card-text text-end">{{ plant.price }} руб.</p>
+                    <p
+                            class="card-text text-end {% if plant.sale %}text-decoration-line-through fs-6
+                            {% else %}
+                            fs-3
+                            {% endif %}">
+                        {{ plant.price }} руб.</p>
+                    {% if plant.sale %}
+                    <p class="card-text text-end text-danger">Скидка {{ plant.sale }}%</p>
+                    <p class="card-text text-end fs-3">{{ plant.get_sale_price }} руб.</p>
+                    {% endif %}
                     <div class="row align-items-center mb-3 justify-content-center">
                         <div class="col-auto mb-2">
                             {% if request.user.is_authenticated %}
@@ -35,7 +44,7 @@
                             <a
                                     href="{% url 'user:login' %}?next={% url 'carts:add_item' plant.slug %}&plant_slug={{ plant.slug }}"
                                class="btn btn-success">Добавить
-                                вкорзину (требуется вход)</a>
+                                в корзину (требуется вход)</a>
                             {% endif %}
                         </div>
                         <div class="col-auto">
