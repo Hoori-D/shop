@@ -1,5 +1,5 @@
-from django.db.models import F
-from django.db.models import Sum
+from django.db.models import F, Q
+from django.db.models import Sum, Count
 from django.shortcuts import render, get_object_or_404
 
 from django.http import Http404
@@ -7,6 +7,7 @@ from django.http import Http404
 from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
 
+from carts.models import Cart
 from catalog.models import Plant, Category
 from catalog.utils import q_search
 
@@ -37,9 +38,16 @@ class PlantListView(ListView):
             qs =  qs.filter(category__slug=category_slug)
 
         if not order or order == 'default' :
-            return qs.annotate(total_in_cart=Sum('orders__quantity'))
-
-        return qs.order_by(order).annotate(total_in_cart=Sum('orders__quantity'))
+            if self.request.user.is_authenticated:
+                cart = Cart.objects.filter(user=self.request.user).first()
+                return qs.annotate(total_in_cart=Sum('orders__quantity', filter=Q(orders__cart=cart)))
+            else:
+                return qs
+        if self.request.user.is_authenticated:
+            cart = Cart.objects.filter(user=self.request.user).first()
+            return qs.order_by(order).annotate(total_in_cart=Sum('orders__quantity', filter=Q(orders__cart=cart)))
+        else:
+            return qs.order_by(order)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
