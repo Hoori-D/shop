@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_extensions',
 
-    'main',
+    'main.apps.MainConfig',
     'catalog',
     'user',
     'carts',
@@ -113,8 +113,8 @@ DATABASES = {
 
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-        "LOCATION": "unique-snowflake",
+        "BACKEND": str(os.getenv("CACHE_BACKEND")),
+        "LOCATION": str(os.getenv("CACHE_LOCATION")),
         "TIMEOUT": 300,
         "OPTIONS": {"MAX_ENTRIES": 300}
     }

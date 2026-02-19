@@ -7,7 +7,7 @@ from django.views.generic.list import ListView
 from catalog.models import Category
 
 
-@method_decorator(cache_page(60 * 1/6), name='dispatch')
+@method_decorator(cache_page(600, key_prefix='main_page'), name='dispatch')
 class IndexView(ListView):
     template_name = 'main/index.html'
     model = Category
@@ -20,7 +20,6 @@ class IndexView(ListView):
         return context
 
 
-@method_decorator(cache_page(60 * 1/6), name='dispatch')
 class AboutView(TemplateView):
     template_name = 'main/about.html'
 
