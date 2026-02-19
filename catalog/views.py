@@ -39,7 +39,7 @@ class PlantListView(ListView):
         if not order or order == 'default' :
             return qs.annotate(total_in_cart=Sum('orders__quantity'))
 
-        return qs.order_by(order)
+        return qs.order_by(order).annotate(total_in_cart=Sum('orders__quantity'))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
