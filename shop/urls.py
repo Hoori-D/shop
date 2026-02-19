@@ -27,10 +27,10 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls', namespace='main')),
-    path('catalog/', include('catalog.urls', namespace='catalog')),
-    path('user/', include('user.urls', namespace='user')),
-    path('cart/', include('carts.urls', namespace='carts')),
-    path('profile/', include('user_profile.urls', namespace='profile')),
+    path('catalogs/', include('catalog.urls', namespace='catalog')),
+    path('users/', include('user.urls', namespace='user')),
+    path('carts/', include('carts.urls', namespace='carts')),
+    path('profiles/', include('user_profile.urls', namespace='profile')),
 ] + debug_toolbar_urls()
 
 if settings.DEBUG:
