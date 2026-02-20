@@ -34,4 +34,10 @@ class CartItem(models.Model):
         return f'Товар {self.plant} в количестве {self.quantity} шт.'
 
     def total_price(self):
-        return self.plant.price * self.quantity
+        return self.plant.price * self.goods_can_be_delivered()
+
+    def goods_can_be_delivered(self):
+        count = self.quantity
+        if self.plant.stock_count < self.quantity:
+            count = self.plant.stock_count
+        return count
