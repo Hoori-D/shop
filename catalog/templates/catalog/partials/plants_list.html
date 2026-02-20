@@ -38,17 +38,23 @@
                     {% endif %}
                     <div class="row align-items-center mb-3 justify-content-center">
                         <div class="col-auto mb-2">
-                            {% if request.user.is_authenticated %}
-                            <a href="{% url 'carts:add_item' plant.slug %}" class="btn btn-success">Добавить вкорзину</a>
+                            {% if plant.stock_count %}
+                                {% if request.user.is_authenticated %}
+                                    {% if not plant.total_in_cart %}
+                                        <a href="{% url 'carts:add_item' plant.slug %}" class="btn btn-success">Добавить вкорзину</a>
+                                    {% endif %}
+                                {% else %}
+                                <a href="{% url 'user:login' %}?next={% url 'carts:add_item' plant.slug %}&plant_slug={{ plant.slug }}"
+                                   class="btn btn-success">
+                                    Добавить в корзину (требуется вход)
+                                </a>
+                                {% endif %}
                             {% else %}
-                            <a
-                                    href="{% url 'user:login' %}?next={% url 'carts:add_item' plant.slug %}&plant_slug={{ plant.slug }}"
-                               class="btn btn-success">Добавить
-                                в корзину (требуется вход)</a>
+                                <p class="card-text text-end">Товар закончился</p>
                             {% endif %}
                         </div>
                         <div class="col-auto">
-                                {% if request.user.is_authenticated == True and plant.total_in_cart %}
+                                {% if request.user.is_authenticated == True and plant.total_in_cart and plant.stock_count %}
                                 <a href="{% url 'carts:add_item'  plant.slug  %}" class="btn btn-success me-2"><i
                                         class="bi bi-plus-circle"></i></a>
                                 {{ plant.total_in_cart }}
