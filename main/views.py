@@ -20,6 +20,7 @@ class IndexView(ListView):
         return context
 
 
+@method_decorator(cache_page(600, key_prefix='about_page'), name='dispatch')
 class AboutView(TemplateView):
     template_name = 'main/about.html'
 
