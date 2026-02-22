@@ -6,3 +6,6 @@ class UserProfileConfig(AppConfig):
     name = 'user_profile'
 
     verbose_name = 'Профиль'
+
+    def ready(self):
+        from . import signals

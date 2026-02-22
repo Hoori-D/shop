@@ -4,7 +4,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
+from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView
 from django.contrib.auth import get_user_model
 
@@ -25,6 +27,7 @@ class IndexView(UserPassesTestMixin, LoginRequiredMixin, DetailView):
         return context
 
 
+@method_decorator(cache_page(600, key_prefix='profile_page'), name='dispatch')
 class ProfileChange(UserPassesTestMixin, LoginRequiredMixin, View):
     template_name = 'user_profile/index.html'
 
