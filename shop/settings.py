@@ -113,8 +113,8 @@ DATABASES = {
 
 CACHES = {
     "default": {
-        "BACKEND": str(os.getenv("CACHE_BACKEND")),
-        "LOCATION": str(os.getenv("CACHE_LOCATION")),
+        "BACKEND": 'django_redis.cache.RedisCache',
+        "LOCATION": 'redis://localhost:6379/1',
         "TIMEOUT": 300,
         "OPTIONS": {"MAX_ENTRIES": 300}
     }
