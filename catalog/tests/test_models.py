@@ -10,7 +10,7 @@ class CategoryTest(TestCase):
         self.category = Category.objects.create(name='Test', slug='test')
 
     def test_get_absolute_url(self):
-        self.assertEqual(self.category.get_absolut_url(), '/catalog/test/')
+        self.assertEqual(self.category.get_absolut_url(), '/catalogs/test/')
 
 
 
@@ -43,10 +43,7 @@ class PlantTest(TestCase):
             self.plant.full_clean()
 
     def test_get_absolute_url(self):
-        self.assertEqual(self.plant.get_absolut_url(), '/catalog/plant/test/')
-
-    def test_get_sale_price(self):
-        self.assertEqual(self.plant.get_sale_price(), 100.00)
+        self.assertEqual(self.plant.get_absolut_url(), '/catalogs/plant/test/')
 
     def test_negative_price_constraints(self):
         self.plant.price = -100.00

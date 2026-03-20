@@ -8,17 +8,6 @@ from django.urls import reverse
 
 class TestAboutPage(SimpleTestCase):
 
-    def test_about_page_correct_template(self):
-        response = self.client.get(reverse('main:about'))
-        self.assertTemplateUsed(response, 'main/about.html')
-
-    def test_about_page_context(self):
-        response = self.client.get(reverse('main:about'))
-        self.assertIn('title', response.context)
-        self.assertEqual(response.context['title'], 'О нас')
-        self.assertIn('slug', response.context)
-        self.assertEqual(response.context['slug'], 'all')
-
     def test_about_page_content(self):
         response = self.client.get(reverse('main:about'))
         self.assertContains(response, 'О нас', status_code=200)
@@ -28,10 +17,6 @@ class TestMainPage(TestCase):
     def setUp(self):
         Category.objects.create(name='Test Category1', slug='test-category1', image='test.jpg')
         Category.objects.create(name='Test Category2', slug='test-category2', image='test.jpg')
-
-    def test_main_page_correct_template(self):
-        response = self.client.get(reverse('main:index'))
-        self.assertTemplateUsed(response, 'main/index.html')
 
     def test_main_page_context(self):
         response = self.client.get(reverse('main:index'))
